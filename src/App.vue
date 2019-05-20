@@ -10,7 +10,7 @@
       </div>
     </header>
     <div class="container">
-      <Add/>
+      <Add :addComm="addComm"/>
       <!--将暴露的数据comments传递给组件List-->
       <List :comments="comments"/>
     </div>
@@ -25,6 +25,11 @@
     name: 'App',
     components:{
       Add,List
+    },
+    methods:{
+      addComm(comment){
+        this.comments.unshift(comment);
+      }
     },
     data(){
       return {
