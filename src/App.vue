@@ -11,7 +11,8 @@
     </header>
     <div class="container">
       <Add/>
-      <List/>
+      <!--将暴露的数据comments传递给组件List-->
+      <List :comments="comments"/>
     </div>
   </div>
 </template>
@@ -24,6 +25,13 @@
     name: 'App',
     components:{
       Add,List
+    },
+    data(){
+      return {
+        comments:[
+          {name:"A",content:"Vue不好学"},
+          {name:"B",content:"Vue好学  很简单"},{name:"C",content:"Vue比react好用好学"},{name:"我",content:"这些我都会"}]
+      }
     }
   }
 </script>
