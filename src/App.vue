@@ -12,7 +12,7 @@
     <div class="container">
       <Add :addComm="addComm"/>
       <!--将暴露的数据comments传递给组件List-->
-      <List :comments="comments"/>
+      <List :comments="comments" :deleteComm="deleteComm"/>
     </div>
   </div>
 </template>
@@ -29,6 +29,9 @@
     methods:{
       addComm(comment){
         this.comments.unshift(comment);
+      },
+      deleteComm(index){
+        this.comments.splice(index,1);
       }
     },
     data(){
