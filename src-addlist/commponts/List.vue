@@ -11,7 +11,7 @@
 <script>
   import Item from "./Item.vue"
   export default {
-    /*声明接收数据*/
+    /*声明接收数据或者方法*/
     props:["comments","deleteComm"],
     name: 'List',
     components:{
@@ -24,6 +24,4 @@
   .reply {
     margin-top: 0px;
   }
-
-
 </style>
