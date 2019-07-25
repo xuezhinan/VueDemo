@@ -29,9 +29,15 @@
     line-height: 40px;
     width: 100%;
     display: flex;
+    border-bottom: 1px solid rgba(7,17,27,0.1);
   }
   .tab .tab-item{
     flex: 1;
     text-align: center;
+    font-size: 14px;
+    color: rgb(77,85,93);
+  }
+  .router-link-active{
+    color: rgb(240,20,20) !important;
   }
 </style>
