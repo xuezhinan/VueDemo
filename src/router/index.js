@@ -23,7 +23,7 @@ export default new VueRouter({
     },
     {
       path: '/',
-      component: Goods
+      redirect: '/goods'
     }
   ]
 })

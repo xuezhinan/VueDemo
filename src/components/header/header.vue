@@ -1,16 +1,218 @@
 <template>
   <div class="header">
-
-    I am Header
+    <div class="content-wrapper">
+      <div class="avatar">
+        <img height="64" width="64" :src="seller.avatar" alt="">
+      </div>
+      <div class="content">
+        <div class="title">
+          <span class="brand"></span>
+          <span class="name">{{seller.name}}</span>
+        </div>
+        <div class="description">
+          <span>{{seller.description}}/{{seller.deliveryTime}}分钟送达</span>
+        </div>
+        <div v-if="seller.supports" class="support">
+          <span class="icon" :class="classMap[seller.supports[0].type]"></span>
+          <span class="text">{{seller.supports[0].description}}</span>
+        </div>
+      </div>
+      <div class="support-content" @click="showDetails()">
+        <span class="count" v-if="seller.supports">{{seller.supports.length}}个</span>
+        <i class="icon-keyboard_arrow_right"></i>
+      </div>
+    </div>
+    <div class="bulletin-wrapper" @click="showDetails()">
+      <span class="bulletin-title"></span><span class="bulletin-text" v-if="seller.bulletin">{{seller.bulletin}}</span>
+      <i class="icon-keyboard_arrow_right"></i>
+    </div>
+    <div class="background">
+      <img :src="seller.avatar" alt="">
+    </div>
+    <div class="detail" v-show="showDetail">
+      <div class="detail-wrapper">
+        <div class="detail-main clearfix">
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+          <p>{{seller.bulletin}}</p>
+        </div>
+      </div>
+      <div class="detail-close">
+        <i class="icon-close"></i>
+      </div>
+    </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   export default {
-    name: 'header'
+    name: 'header',
+    props: {
+      seller: Object
+    },
+    methods:{
+      showDetails() {
+        this.showDetail = true;
+      }
+    },
+    data() {
+      return {
+        classMap : ["decrease","discount","special","invoice","guarantee"],
+        showDetail : false
+      }
+    }
   }
 </script>
 
-<style scoped>
+<style  lang="stylus" rel="stylesheet/stylus">
+  @import "../../common/stylus/mixin.styl";
+  .header
+    color: #fff
+    background-color rgba(7,17,27,0.5)
+    position relative
+    overflow hidden
+    .content-wrapper
+      position relative
+      padding : 24px 12px 18px 24px
+      font-size 0
+      .avatar
+        display inline-block
+        img
+          border-radius 2px
+      .content
+        font-size 14px
+        display :inline-block
+        margin-left 16px
+        vertical-align top
+        .title
+          margin 2px 0px 8px 0px
+          .brand
+            display inline-block
+            width 30px
+            height 18px
+            bg-imag(brand)
+            background-size 30px 18px
+            background-repeat no-repeat
+            vertical-align top
+          .name
+            margin-left 6px
+            font-size 16px
+            line-height 18px
+            font-weight bold
+        .description
+          font-size 12px
+          line-height 12px
+          font-weight 200
+          margin-bottom 10px
+        .support
+          .icon
+            display inline-block
+            width 12px
+            height 12px
+            background-size 12px 12px
+            margin-right 4px
+            background-repeat no-repeat
+            &.decrease
+              bg-imag("decrease_1")
+            &.discount
+              bg-imag("discount_1")
+            &.guarantee
+              bg-imag("guarantee_1")
+            &.special
+              bg-imag("special_1")
+            &.invoice
+              bg-imag("invoice_1")
+          .text
+            font-size 10px
+            line-height 12px
+            font-weight 200
+            vertical-align top
+
+
+
+      .support-content
+        position absolute
+        padding 0 8px
+        right 12px
+        height 24px
+        bottom 14px
+        line-height 24px
+        background rgba(0,0,0,0.2)
+        border-radius 14px
+        .count
+          font-size 10px
+          vertical-align top
+        .icon-keyboard_arrow_right
+          font-size 10px
+          margin-left 2px
+          line-height 24px
+
+
+    .bulletin-wrapper
+      height 28px
+      padding 0 22px 0 12px
+      line-height 28px
+      background-color rgba(7,17,27,0.2)
+      overflow hidden
+      text-overflow ellipsis
+      white-space nowrap
+      position relative
+      .bulletin-title
+        margin-right 4px
+        display inline-block
+        height 12px
+        width 22px
+        bg-imag("bulletin")
+        background-size 22px 12px
+        background-repeat no-repeat
+        font-size 12px
+      .bulletin-text
+        font-size 10px
+        vertical-align top
+      .icon-keyboard_arrow_right
+        position absolute
+        font-size 10px
+        line-height 28px
+        right 10px
+
+    .background
+      img
+        height 100%
+        width 100%
+        position absolute
+        top 0
+        left 0
+        filter blur(10px)
+        z-index -1
+    .detail
+      position fixed
+      height 100%
+      width 100%
+      background-color rgba(7,17,27,0.8)
+      top 0
+      left 0
+      z-index 100
+      overflow auto
+      .detail-wrapper
+        min-height 100%
+        .detail-main
+          margin-top 64px
+          padding-bottom 64px
+      .detail-close
+        position relative
+        width 32px
+        height 32px
+        font-size 32px
+        margin -64px auto 0 auto
+        clear both
 
 </style>
