@@ -29,31 +29,48 @@
     <div class="background">
       <img :src="seller.avatar" alt="">
     </div>
-    <div class="detail" v-show="showDetail">
-      <div class="detail-wrapper">
-        <div class="detail-main clearfix">
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
-          <p>{{seller.bulletin}}</p>
+    <transition name="fade">
+      <div class="detail" v-show="showDetail">
+        <div class="detail-wrapper">
+          <div class="detail-main clearfix">
+            <h1 class="name">{{seller.name}}</h1>
+            <div class="star-wrapper">
+              <star :score="seller.score" :size="48"></star>
+            </div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">优惠信息</div>
+              <div class="line"></div>
+            </div>
+            <div v-if="seller.supports"  class="support">
+              <div class="support-item" v-for="(support,index) in seller.supports">
+                <span class="icon" :class="classMap[seller.supports[index].type]"></span>
+                <span class="text">{{seller.supports[index].description}}</span>
+              </div>
+            </div>
+            <div></div>
+            <div class="title">
+              <div class="line"></div>
+              <div class="text">商家公告</div>
+              <div class="line"></div>
+            </div>
+            <div class="bulletin">
+              <p>{{seller.bulletin}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="detail-close" @click="closeDetaile()">
+          <i class="icon-close" @click="closeDetaile()"></i>
         </div>
       </div>
-      <div class="detail-close">
-        <i class="icon-close"></i>
-      </div>
-    </div>
+    </transition>
+
   </div>
 </template>
 
 <script type="text/ecmascript-6">
+  import star from  '../star/star'
+
   export default {
     name: 'header',
     props: {
@@ -62,6 +79,9 @@
     methods:{
       showDetails() {
         this.showDetail = true;
+      },
+      closeDetaile(){
+        this.showDetail = false;
       }
     },
     data() {
@@ -69,6 +89,10 @@
         classMap : ["decrease","discount","special","invoice","guarantee"],
         showDetail : false
       }
+    },
+    components:{
+      /*注册引用过来的组件*/
+      star
     }
   }
 </script>
@@ -197,16 +221,80 @@
       position fixed
       height 100%
       width 100%
-      background-color rgba(7,17,27,0.8)
       top 0
       left 0
       z-index 100
       overflow auto
+      background-color rgba(7,17,27,0.9)
       .detail-wrapper
         min-height 100%
         .detail-main
           margin-top 64px
           padding-bottom 64px
+          width 100%
+          .name
+            font-size 16px
+            font-weight 700
+            line-height 16px
+            text-align center
+          .star-wrapper
+            margin-top 16px
+            text-align center
+            padding 2px 0
+          .title
+            display flex
+            width 80%
+            margin 28px auto 24px auto
+            .line
+              flex 1
+              position relative
+              border-bottom 1px solid rgba(225,225,225,0.2)
+              top -6px
+            .text
+              padding 0 12px
+              font-size 14px
+              font-weight 700
+          .support
+            width 80%
+            margin 0 auto
+            text-align left
+            .support-item
+              margin-bottom 12px
+              padding 0 12px
+              font-size 0
+              &:last-child
+                margin-bottom 0
+              .icon
+                display inline-block
+                width 16px
+                height 16px
+                vertical-align top
+                margin-right 6px
+                background-size 16px 16px
+                background-repeat no-repeat
+                &.decrease
+                  bg-imag("decrease_2")
+                &.discount
+                  bg-imag("discount_2")
+                &.guarantee
+                  bg-imag("guarantee_2")
+                &.special
+                  bg-imag("special_2")
+                &.invoice
+                  bg-imag("invoice_2")
+              .text
+                font-weight 200
+                line-height 16px
+                font-size 12px
+
+          .bulletin
+            width 80%
+            margin 0 auto
+            p
+              font-size 12px
+              font-weight 200
+              line-height 24px
+              padding 0 12px
       .detail-close
         position relative
         width 32px
