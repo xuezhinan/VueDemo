@@ -22,7 +22,8 @@
     },
     data(){
       return {
-        seller : {}
+        seller : {},
+        goods: []
       }
     },
     created(){
@@ -31,7 +32,6 @@
         if (response.msgFlag == 0) {
           this.seller = response.data;
         }
-        console.log(this.seller);
       });
     }
   }
@@ -53,6 +53,6 @@
           font-size: 14px
           color: rgb(77,85,93)
 
-   .router-link-active
+  .router-link-active
     color: rgb(240,20,20) !important
 </style>
