@@ -92,6 +92,9 @@
         });
         this.foodScroll.on("scroll", (position) => {
           this.scrollY = Math.abs(Math.round(position.y));
+          let menuList = document.getElementsByClassName("menu-item");
+          let mEl = menuList[this.currentIndex];
+          this.menuScroll.scrollToElement(mEl,300);
         });
       },
       _calculateHeight() {
