@@ -1,11 +1,16 @@
 <template>
   <div class="goods">
     <div v-if="goods" class="menu-wrapper">
-      <ul >
+      <!--<ul >
         <li v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex === index}" @click="selectMenu(index,$event)">
           <span class="text"><span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}</span>
         </li>
-      </ul>
+      </ul>-->
+      <table>
+        <tr v-for="(item,index) in goods" class="menu-item" :class="{'current':currentIndex === index}" @click="selectMenu(index,$event)">
+          <span class="text"><span v-show="item.type>0" class="icon" :class="classMap[item.type]"></span>{{item.name}}</span>
+        </tr>
+      </table>
     </div>
     <div class="foods-wrapper">
       <ul>
@@ -116,15 +121,13 @@
       flex 0 0 80px
       width 80px
       background-color #f3f5f7
-      & > ul
-        padding 0 12px
       .menu-item
-        display table
         font-size 12px
         color rgb(77,85,93)
         line-height 14px
         height 54px
         width 56px
+        cellpadding 0 12px
         border-bottom 1px solid rgba(7,17,27,0.1)
         &.current
           font-weight 700
