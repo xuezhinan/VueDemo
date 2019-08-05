@@ -90,11 +90,23 @@
         this.foodScroll = new BScroll(".foods-wrapper",{
           probeType: 3
         });
+        //监听div滚动事件
         this.foodScroll.on("scroll", (position) => {
           this.scrollY = Math.abs(Math.round(position.y));
           let menuList = document.getElementsByClassName("menu-item");
           let mEl = menuList[this.currentIndex];
           this.menuScroll.scrollToElement(mEl,300);
+        });
+        //监听touch结束事件，也就是下拉松手的那个时间的事件
+        this.foodScroll.on("touchEnd",(pos) => {
+          if (pos.y > 30){
+            //模拟加载更多
+            console.log("加载更多");
+            //页面加载数据刷新后要重新刷新foodScroll计算高度；
+            this.foodScroll.refresh();
+          }else {
+            this.foodScroll.refresh();
+          }
         });
       },
       _calculateHeight() {
