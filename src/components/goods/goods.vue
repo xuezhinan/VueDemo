@@ -101,7 +101,7 @@
         this.foodScroll.on("touchEnd",(pos) => {
           if (pos.y > 30){
             //模拟加载更多
-            console.log("加载更多");
+            console.log("下拉刷新");
             //页面加载数据刷新后要重新刷新foodScroll计算高度；
             this.foodScroll.refresh();
           }else {
