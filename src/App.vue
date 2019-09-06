@@ -8,13 +8,18 @@
 
     </div>
     <div>
-      <router-view></router-view>
+      <v-touch v-on:swipeleft="moveTouch">
+        <router-view></router-view>
+      </v-touch>
     </div>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import Header from "./components/header/header.vue"
+  import VueTouch from 'vue-touch'
+  import Vue from 'vue'
+  Vue.use(VueTouch, {name: 'v-touch'})
   export default {
     name: 'App',
     components:{
@@ -33,6 +38,11 @@
           this.seller = response.data;
         }
       });
+    },
+    methods: {
+      moveTouch() {
+        console.log("左滑");
+      }
     }
   }
 </script>
